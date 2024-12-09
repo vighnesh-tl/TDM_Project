@@ -1,0 +1,265 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "RestSource",
+            "requestMethod": "GET",
+            "paginationRules": {
+              "supportRFC5988": "true"
+            },
+            "httpRequestTimeout": "00:01:40",
+            "requestInterval": "00.00:00:00.010",
+            "datasetSettings": {
+              "type": "RestResource",
+              "schema": [],
+              "externalReferences": {
+                "connection": "1c13b4e1-260c-4aef-895f-cd393957bfff"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "table": "moove"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Landing",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "87f8a396-bee5-4dd3-b6b6-64c16e8ea691",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "post_id",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "post_id",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "post_title",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "post_title",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "permalink",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "permalink",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "time",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "time",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "user_id",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "user_id",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "display_name",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "display_name",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "ip_address",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "ip_address",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "response_status",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "response_status",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "referer",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "referer",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_spent",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "time_spent",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "city",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "city",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "user_email",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "user_email",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "username",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "username",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "post_slug",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "post_slug",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "post_type",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "post_type",
+                  "physicalType": "String"
+                }
+              },
+              {
+                "source": {
+                  "name": "user_role",
+                  "type": "String"
+                },
+                "sink": {
+                  "name": "user_role",
+                  "physicalType": "String"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            },
+            "columnFlattenSettings": {
+              "treatArrayAsString": false,
+              "treatStructAsString": false,
+              "flattenColumnDelimiter": "."
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.0:30:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "moove_historical",
+        "dependsOn": []
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": {
+            "value": "@activity('moove_historical').output",
+            "type": "Expression"
+          },
+          "workspaceId": "fe4d85d6-cd7f-43cf-9d88-32cec9d8090e",
+          "notifyOption": "NoNotification"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Dataflow1",
+        "dependsOn": [
+          {
+            "activity": "moove_historical",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

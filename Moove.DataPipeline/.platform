@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Moove"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "950ed91e-979f-4ca7-b3cd-d536bd0e081f"
+  }
+}

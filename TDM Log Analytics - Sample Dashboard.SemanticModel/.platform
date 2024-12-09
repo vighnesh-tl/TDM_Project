@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "TDM Log Analytics - Sample Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7721f781-3681-4c74-b933-4eefa127f1de"
+  }
+}
